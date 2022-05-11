@@ -3,6 +3,7 @@ class CreateInvestigators < ActiveRecord::Migration[6.1]
     create_table :investigators do |t|
       t.string :name
       t.string :image
+      t.string :weakness
       t.string :deck_link
       t.references :team, null: false, foreign_key: true
 
