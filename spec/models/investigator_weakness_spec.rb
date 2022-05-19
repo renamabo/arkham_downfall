@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe InvestigatorWeakness, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "relationships" do
+    it { should belong_to(:investigator) }
+    it { should belong_to(:weakness) }
+  end
 end
