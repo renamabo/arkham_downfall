@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  resources :investigators
-  resources :teams
+  
+  root 'welcome#index'
+
+  namespace :api do  
+    namespace :v1 do
+      
+      resources :investigators
+      resources :teams
+    end
+  end
+  
   resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
 end
