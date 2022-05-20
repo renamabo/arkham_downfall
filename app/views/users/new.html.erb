@@ -1,5 +1,24 @@
-<h1>New User</h1>
-
-<%= render 'form', user: @user %>
-
-<%= link_to 'Back', users_path %>
+<section class="py-3 text-center container">
+<h1>Register for an Account</h1>
+<br>
+<%= form_with url: users_path, method: :post, local: true do |f| %>
+<div class="row">
+  <div class="col">
+    <%= f.label :username%>
+    <%= f.text_field :username %>
+  </div>
+    <div class="col">
+      <%= f.label :password%>
+      <%= f.password_field :password %>
+    </div>
+      <div class="col">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+</div>
+<br>
+<%= f.submit 'Register' %>
+<% end %>
+<br>
+<p><%= link_to "Already Registered? Login Here", root_path %></p>
+</section>
