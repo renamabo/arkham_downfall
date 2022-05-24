@@ -2,15 +2,17 @@ Rails.application.routes.draw do
   
   root 'welcome#index'
 
-  namespace :api do  
-    namespace :v1 do
-      
-      resources :investigators
-      resources :teams
-    end
+  resources :investigators do
+    resources :teams
   end
   
-  resources :users
+  resources :users, only: [:create, :delete] do
+    get "/dashboard", to: "users#show"
+    post "/dashboard", to: "users#show"
+  end
+  
+  get "/registration", to: "users#new"
+  
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
 end
