@@ -19,15 +19,15 @@ class UsersController < ApplicationController
     user[:username] = user[:username].downcase
     new_user = User.new(user)
     if new_user.save
-      flash[:success] = "Successfully created account!"
+      # flash[:success] = "Successfully created account!"
       session[:user_id] = new_user.id
-      redirect_to user_dashboard_path(new_user.id)
+      redirect_to user_dashboard_path(new_user.id), notice: "Successfully created account!"
     elsif user[:password] != user[:password_confirmation]
-      flash[:error] = "Passwords do not match, please try again."
-      redirect_to registration_path
+      # flash[:error] = "Passwords do not match, please try again."
+      redirect_to registration_path, alert: "Passwords do not match, please try again."
     else
-      flash[:error] = "Unable to register, please try again."
-      redirect_to root_path
+      # flash[:error] = "Unable to register, please try again."
+      redirect_to root_path, alert: "Unable to register, please try again."
     end    
   end
 

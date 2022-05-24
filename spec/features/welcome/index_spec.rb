@@ -15,7 +15,7 @@ RSpec.describe "welcome page" do
     expect(page).to have_link("Register for an Account")
   end
 
-  xit "can redirect to user log in page" do
+  it "can redirect to user log in page" do
     fill_in "username", with: @user.username
     fill_in "password", with: @user.password
 
