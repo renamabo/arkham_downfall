@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       redirect_to user_dashboard_path(new_user.id), notice: "Successfully created account!"
     elsif user[:password] != user[:password_confirmation]
       # flash[:error] = "Passwords do not match, please try again."
-      redirect_to registration_path, alert: "Passwords do not match, please try again."
+      redirect_to registration_path, alert: "Passwords do not match."
     else
       # flash[:error] = "Unable to register, please try again."
       redirect_to root_path, alert: "Unable to register, please try again."

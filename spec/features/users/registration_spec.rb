@@ -26,4 +26,15 @@ RSpec.describe "user registration page" do
       expect(current_path).to eq(user_dashboard_path(user2.id))
       expect(page).to have_content("Successfully created account!")
     end
+
+    it "can redirect back to registration page with error if password does not match" do
+        fill_in :username, with: "gabrellus"
+        fill_in :password, with: "raccoons"
+        fill_in :password_confirmation, with: "waow"
+
+        click_on "Register"
+
+        expect(current_path).to eq(registration_path)
+        expect(page).to have_content("Passwords do not match.")
+    end
 end
