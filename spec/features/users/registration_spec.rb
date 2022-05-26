@@ -15,9 +15,9 @@ RSpec.describe "user registration page" do
     end
 
     it "can register a user given valid credentials" do
-      fill_in :username, with: "gabrellus"
-      fill_in :password, with: "raccoons"
-      fill_in :password_confirmation, with: "raccoons"
+      fill_in :username, with: "stella"
+      fill_in :password, with: "fail"
+      fill_in :password_confirmation, with: "fail"
 
       click_on "Register"
 
@@ -28,13 +28,24 @@ RSpec.describe "user registration page" do
     end
 
     it "can redirect back to registration page with error if password does not match" do
-        fill_in :username, with: "gabrellus"
-        fill_in :password, with: "raccoons"
-        fill_in :password_confirmation, with: "waow"
+        fill_in :username, with: "bbthecat"
+        fill_in :password, with: "imhungry"
+        fill_in :password_confirmation, with: "jk"
 
         click_on "Register"
 
         expect(current_path).to eq(registration_path)
         expect(page).to have_content("Passwords do not match.")
+    end
+
+    it 'can redirect back to registration page with error if username exists' do
+        fill_in :username, with: "gabrellus"
+        fill_in :password, with: "fake"
+        fill_in :password_confirmation, with: "fake"
+
+        click_on "Register"
+
+        expect(current_path).to eq(registration_path)
+        expect(page).to have_content("Unable to create account. Username taken.")
     end
 end

@@ -25,31 +25,22 @@ class UsersController < ApplicationController
     elsif user[:password] != user[:password_confirmation]
       # flash[:error] = "Passwords do not match, please try again."
       redirect_to registration_path, alert: "Passwords do not match."
+    elsif User.where(:username == new_user[:username])
+      redirect_to registration_path, alert: "Unable to create account. Username taken."
     else
       # flash[:error] = "Unable to register, please try again."
-      redirect_to root_path, alert: "Unable to register, please try again."
+      redirect_to registration_path, alert: "Unable to register, please try again."
     end    
   end
 
   # PATCH/PUT /users/1 or /users/1.json
 
   # DELETE /users/1 or /users/1.json
-  def destroy
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  def destroy; end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
+  # Only allow a list of trusted parameters through.
     def user_params
       params.permit(:username, :password, :password_confirmation)
     end
