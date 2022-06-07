@@ -1,14 +1,5 @@
-<h1>New Team Creation</h1>
-<br>
-<%= form_with url: user_teams_path, method: :post, local: true do |f| %>
-    <%= f.label :name, "Name:" %>
-    <%= f.text_field :name %><br>
-    <%= f.label :campaign, "Campaign:" %>
-    <%= f.select :from, [ "The Dunwich Legacy", "The Path to Carcosa", "The Forgotten Age", "The Circle Undone", "The Dream Eaters", "The Innsmouth Conspiracy", "Edge of the Earth" ] %><br>
-    <%= f.label :active, "Active?" %>
-    <%= f.check_box :active, {}, "true", "false" %><br><br>
-    <%= f.submit 'Create Team' %>
-<% end %>
-<br><br><br>
-<%= link_to "Back to Dashboard", user_dashboard_path %>
+<h1>New Team</h1>
 
+<%= render 'form', team: @team %>
+
+<%= link_to 'Back', teams_path %>
