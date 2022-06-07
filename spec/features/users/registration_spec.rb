@@ -4,6 +4,7 @@ RSpec.describe "user registration page" do
   before :each do
     visit registration_path
     @user1 = User.create(username: "gabrellus", password: "password")
+    @user2 = User.create(username: "bb", password: "meow")
   end
 
     it "can display registration form" do
@@ -28,24 +29,35 @@ RSpec.describe "user registration page" do
     end
 
     it "can redirect back to registration page with error if password does not match" do
-        fill_in :username, with: "bbthecat"
-        fill_in :password, with: "imhungry"
-        fill_in :password_confirmation, with: "jk"
+      fill_in :username, with: "bbthecat"
+      fill_in :password, with: "imhungry"
+      fill_in :password_confirmation, with: "jk"
 
-        click_on "Register"
+      click_on "Register"
 
-        expect(current_path).to eq(registration_path)
-        expect(page).to have_content("Passwords do not match.")
+      expect(current_path).to eq(registration_path)
+      expect(page).to have_content("Passwords do not match.")
     end
 
     it 'can redirect back to registration page with error if username exists' do
-        fill_in :username, with: "gabrellus"
-        fill_in :password, with: "fake"
-        fill_in :password_confirmation, with: "fake"
+      fill_in :username, with: "gabrellus"
+      fill_in :password, with: "fake"
+      fill_in :password_confirmation, with: "fake"
 
-        click_on "Register"
+      click_on "Register"
 
-        expect(current_path).to eq(registration_path)
-        expect(page).to have_content("Unable to create account. Username taken.")
+      expect(current_path).to eq(registration_path)
+      expect(page).to have_content("Username taken.")
+    end
+
+    it 'can redirect back to registration page if miscellaneous user error' do
+      fill_in :username, with: ""
+      fill_in :password, with: "attemptnumberone"
+      fill_in :password_confirmation, with: "attemptnumberone"
+
+      click_on "Register"
+
+      expect(current_path).to eq(registration_path)
+      expect(page).to have_content("Unable to register, please try again.")
     end
 end

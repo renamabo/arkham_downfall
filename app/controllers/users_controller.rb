@@ -16,29 +16,30 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     user = user_params
-    user[:username] = user[:username].downcase
     new_user = User.new(user)
     if new_user.save
       # flash[:success] = "Successfully created account!"
       session[:user_id] = new_user.id
       redirect_to user_dashboard_path(new_user.id), notice: "Successfully created account!"
     elsif user[:password] != user[:password_confirmation]
-      # flash[:error] = "Passwords do not match, please try again."
       redirect_to registration_path, alert: "Passwords do not match."
-    elsif User.where(:username == new_user[:username])
-      redirect_to registration_path, alert: "Unable to create account. Username taken."
+      #If the user 
+    elsif User.exists?(username: new_user.username)
+      redirect_to registration_path, alert: "Username taken."
     else
       # flash[:error] = "Unable to register, please try again."
       redirect_to registration_path, alert: "Unable to register, please try again."
     end    
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
-
   # DELETE /users/1 or /users/1.json
   def destroy; end
 
   private
+
+  # def existing_user
+  #   User.where(new_user[:username] == user[:username])
+  # end
 
   # Only allow a list of trusted parameters through.
     def user_params
