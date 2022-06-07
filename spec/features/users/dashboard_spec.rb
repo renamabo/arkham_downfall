@@ -30,7 +30,8 @@ RSpec.describe "user dashboard page" do
   xit "can display a users teams" do
 
     within "#team-pane" do
-        expect(page).to have_content(@user.team)
+        expect(page).to have_content(@user.team1)
+        expect(page).to have_content(@user.team2)
     end
   end
 end
