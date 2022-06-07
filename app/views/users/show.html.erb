@@ -1,3 +1,17 @@
+<div id="welcome-message">
+<h1><%= "Welcome, #{current_user.username}!" %></h1>
+</div>
+<br>
 
+<div id="team-pane">
+<%= link_to "Create A Team", new_user_team_path(current_user.id) %>
 
-<%= link_to 'Back', users_path %>
+<% current_user.teams.each do |team| %>
+    <%= team.name %>
+    <%= team.campaign %>
+<% end %>
+</div>
+
+<br>
+<br>
+<%= link_to "Logout", login_path %>
