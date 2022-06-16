@@ -1,12 +1,14 @@
 require "rails_helper"
 
-RSpec.describe "investigator service" do
-    it "can get an investigator" do
-        #response = InvestigatorService.get_investigator(blah)
-        
-    end
+RSpec.describe "card service" do
+    it "can get all cards" do
+        response = CardService.get_cards
 
-    it "can get all investigators" do
-        #response = InvestigatorService.get_investigators
+        expect(response).to be_an(Array)
+        expect(response.first).to have_key(:pack_code)
+        expect(response.first).to have_key(:type_code)
+        expect(response.first).to have_key(:faction_code)
+        expect(response.first).to have_key(:name)
+        expect(response.first).to have_key(:text)
     end
 end
