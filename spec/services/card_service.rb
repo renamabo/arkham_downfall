@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "card service" do
+RSpec.describe "card service", :vcr do
     it "can get all cards" do
         response = CardService.get_cards
 
