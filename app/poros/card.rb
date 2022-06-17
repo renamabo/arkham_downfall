@@ -8,8 +8,13 @@ class Card
                 :quantity,
                 :deck_limit,
                 :traits,
-                :permanent
-                
+                :permanent,
+                :double_sided,
+                :back_text,
+                :back_flavor,
+                :imagesrc,
+                :backimagesrc
+
     def initialize(card_data)
         @pack_name = card_data[:pack_name]
         @faction_name = card_data[:faction_name]
@@ -21,5 +26,10 @@ class Card
         @deck_limit = card_data[:deck_limit]
         @traits = card_data[:traits]
         @permanent = card_data[:permanent]
+        @double_sided = card_data[:double_sided]
+        @back_text = card_data[:back_text]
+        @back_flavor = card_data[:back_flavor]
+        @imagesrc = card_data[:imagesrc]
+        @backimagesrc = card_data[:backimagesrc]
     end
 end
