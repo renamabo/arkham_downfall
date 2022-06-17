@@ -1,4 +1,4 @@
-class InvestigatorsController < ApplicationController
+class CardsController < ApplicationController
 
   # GET /investigators or /investigators.json
   def index; end
