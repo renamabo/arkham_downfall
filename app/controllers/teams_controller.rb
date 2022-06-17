@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   # before_action :set_team, only: %i[ show edit update destroy ]
 
@@ -29,8 +31,8 @@ class TeamsController < ApplicationController
 
   private
 
-    # Only allow a list of trusted parameters through.
-    def team_params
-      params.permit(:name, :campaign, :active)
-    end
+  # Only allow a list of trusted parameters through.
+  def team_params
+    params.permit(:name, :campaign, :active)
+  end
 end

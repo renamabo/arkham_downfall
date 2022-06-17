@@ -1,5 +1,6 @@
-class CardsController < ApplicationController
+# frozen_string_literal: true
 
+class CardsController < ApplicationController
   # GET /investigators or /investigators.json
   def index; end
 
