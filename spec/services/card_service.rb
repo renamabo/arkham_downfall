@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe 'card service', :vcr do
-  it 'can get all cards' do
+RSpec.describe 'card service' do
+  it 'can get all cards', :vcr do
     response = CardService.get_cards
 
     expect(response).to be_an(Array)
