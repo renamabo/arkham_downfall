@@ -1,6 +1,7 @@
-# # frozen_string_literal: true
-
-# class Card
+# # # frozen_string_literal: true
+# class Card < ApplicationRecord
+#   CARD_VARS = ["pack_name", "type_code", "subtype_code", "faction_name", "code", "name", "subname", "text", "quantity", "deck_limit", "traits", "flavor", "permanent", "double_sided", "back_text", "back_flavor", "imagesrc", "backimagesrc"]
+  
 #   attr_reader :pack_name,
 #               :type_code,
 #               :subtype_code,
@@ -12,6 +13,7 @@
 #               :quantity,
 #               :deck_limit,
 #               :traits,
+#               :flavor,
 #               :permanent,
 #               :double_sided,
 #               :back_text,
@@ -31,6 +33,7 @@
 #     @quantity = card_data[:quantity]
 #     @deck_limit = card_data[:deck_limit]
 #     @traits = card_data[:traits]
+#     @flavor = card_data[:flavor]
 #     @permanent = card_data[:permanent]
 #     @double_sided = card_data[:double_sided]
 #     @back_text = card_data[:back_text]

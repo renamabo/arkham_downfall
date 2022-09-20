@@ -3,7 +3,7 @@
 class BaseService
   class << self
     def parse_json(response)
-      JSON.parse(response.body, symbolize_names: true)
+      JSON.parse(response.body)
     end
 
     def conn(url)
