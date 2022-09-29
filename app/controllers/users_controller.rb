@@ -1,5 +1,6 @@
-class UsersController < ApplicationController
+# frozen_string_literal: true
 
+class UsersController < ApplicationController
   # GET /users or /users.json
   # Do not need an index
 
@@ -20,16 +21,16 @@ class UsersController < ApplicationController
     if new_user.save
       # flash[:success] = "Successfully created account!"
       session[:user_id] = new_user.id
-      redirect_to user_dashboard_path(new_user.id), notice: "Successfully created account!"
+      redirect_to user_dashboard_path(new_user.id), notice: 'Successfully created account!'
     elsif user[:password] != user[:password_confirmation]
-      redirect_to registration_path, alert: "Passwords do not match."
-      #If the user 
+      redirect_to registration_path, alert: 'Passwords do not match.'
+      # If the user
     elsif User.exists?(username: new_user.username)
-      redirect_to registration_path, alert: "Username taken."
+      redirect_to registration_path, alert: 'Username taken.'
     else
       # flash[:error] = "Unable to register, please try again."
-      redirect_to registration_path, alert: "Unable to register, please try again."
-    end    
+      redirect_to registration_path, alert: 'Unable to register, please try again.'
+    end
   end
 
   # DELETE /users/1 or /users/1.json
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
   # end
 
   # Only allow a list of trusted parameters through.
-    def user_params
-      params.permit(:username, :password, :password_confirmation)
-    end
+  def user_params
+    params.permit(:username, :password, :password_confirmation)
+  end
 end

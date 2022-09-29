@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Investigator < ApplicationRecord
   belongs_to :team
   has_many :investigator_weaknesses
