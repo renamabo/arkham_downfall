@@ -6,13 +6,8 @@ namespace :cards do
     response = BaseService.conn('https://arkhamdb.com/').get('/api/public/cards/')
     raw_data = BaseService.parse_json(response)
     data = self.remove_erroneous_keys(raw_data)
-    # reset Card::CARDS, then pull in payload
-    Card::CARDS << self.remove_placeholder_and_create_cards(data)
-  end
-
-  desc 'Cards service: retrieve information from Card::CARDS and saves data to DB'
-  task save_cards: :environment do
-    Card::CARDS[0].each do |data|
+    cards = self.remove_placeholder_and_create_cards(data)
+    cards.each do |data|
       Card.create(
         pack_name: data['pack_name'],
         type_code: data['type_code'],
@@ -34,10 +29,10 @@ namespace :cards do
         imagesrc: data['imagesrc'],
         backimagesrc: data['backimagesrc']
       )
-    end
+    end 
   end
 
-
+  
   private
   
   def remove_erroneous_keys(data)

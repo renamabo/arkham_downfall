@@ -14,12 +14,4 @@ RSpec.describe 'cards service tasks' do
     expect(response.first.type_code).to eq('investigator')
     expect(Card::CARDS[0].first.code).to eq(1001)
   end
-
-  it 'can call get_cards task and save json to DB', :vcr do
-    Rake::Task['cards:get_cards'].invoke
-    proc = Rake::Task['cards:save_cards'].invoke
-    response = proc[0].call
-    
-    expect(response).to be_an(Array)
-  end
 end
