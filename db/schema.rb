@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2022_07_28_203630) do
     t.integer "quantity"
     t.integer "deck_limit"
     t.string "traits"
+    t.string "flavor"
     t.boolean "permanent"
     t.boolean "double_sided"
     t.string "back_text"

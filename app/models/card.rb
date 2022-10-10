@@ -1,6 +1,8 @@
-require './app/poros/card.rb'
 class Card < ApplicationRecord
+    CARD_VARS = ["pack_name", "type_code", "subtype_code", "faction_name", "code", "name", "subname", "text", "quantity", "deck_limit", "traits", "flavor", "permanent", "double_sided", "back_text", "back_flavor", "imagesrc", "backimagesrc"]
+    # map through payload, pull keys from hash if they are not in CARD_VARS constant.
 
+    # to be tested
     def sort_investigators
         cards = CardFacade.all_cards
         cards.select do |card|
@@ -8,13 +10,15 @@ class Card < ApplicationRecord
         end
     end
 
+    # to be tested
     def sort_weaknesses
         cards = CardFacade.all_cards
         cards.select do |card|
             card.name != "Random Basic Weakness" && card.type_code == "treachery" && card.subtype_code == "basicweakness"
         end
     end
-        
+    
+    # to be tested
     def duplicate_weaknesses
         cards = CardFacade.all_cards
         cards.each do |card|
@@ -25,20 +29,3 @@ class Card < ApplicationRecord
     end
 end
 
-
-    # map through payload, pull keys from hash if they are not in CARD_VARS constant.
-    # def pool_unused_params(data)
-    #     # if the card data's key appears in CARD_VARS, include in card data.
-    #     # else, delete that key/value pair.
-    #     data.map do |card_data|
-    #         object_data = Hash.new
-    #         card_data.map do |k, v|
-    #             if Card::CARD_VARS.include?(k)
-    #                 |h, k| h[k] = 
-    #             else
-    #                 k.delete
-    #             end
-    #         end
-    #     end
-    #     object_data
-    # end
