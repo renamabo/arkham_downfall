@@ -2,13 +2,39 @@ require './lib/services/base_service.rb'
 
 namespace :cards do
   desc 'Cards service: connect to ArkhamDB, consumes API and parses json'
-  # Services make calls to remote API
-  # Gets all cards from ArkhamDB.com.'
   task get_cards: :environment do
     response = BaseService.conn('https://arkhamdb.com/').get('/api/public/cards/')
     raw_data = BaseService.parse_json(response)
     data = self.remove_erroneous_keys(raw_data)
-    self.remove_placeholder_and_create_cards(data)
+    # reset Card::CARDS, then pull in payload
+    Card::CARDS << self.remove_placeholder_and_create_cards(data)
+  end
+
+  desc 'Cards service: retrieve information from Card::CARDS and saves data to DB'
+  task save_cards: :environment do
+    Card::CARDS[0].each do |data|
+      Card.create(
+        pack_name: data['pack_name'],
+        type_code: data['type_code'],
+        type_name: data['type_name'],
+        subtype_code: data['subtype_code'],
+        faction_name: data['faction_name'],
+        code: data['code'],
+        name: data['name'],
+        subname: data['subname'],
+        text: data['text'],
+        quantity: data['quantity'],
+        deck_limit: data['deck_limit'],
+        traits: data['traits'],
+        flavor: data['flavor'],
+        permanent: data['permanent'],
+        double_sided: data['double_sided'],
+        back_text: data['back_text'],
+        back_flavor: data['back_flavor'],
+        imagesrc: data['imagesrc'],
+        backimagesrc: data['backimagesrc']
+      )
+    end
   end
 
 
