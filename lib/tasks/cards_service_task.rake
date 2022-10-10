@@ -8,7 +8,7 @@ namespace :cards do
     response = BaseService.conn('https://arkhamdb.com/').get('/api/public/cards/')
     raw_data = BaseService.parse_json(response)
     data = self.remove_erroneous_keys(raw_data)
-    self.create_cards(data)
+    self.remove_placeholder_and_create_cards(data)
   end
 
 
@@ -25,8 +25,9 @@ namespace :cards do
     data
   end
 
-  def create_cards(refined_data)
-    refined_data.map do |card_data|
+  def remove_placeholder_and_create_cards(data)
+    data.shift
+    data.map do |card_data|
       Card.new(card_data)
     end
   end
