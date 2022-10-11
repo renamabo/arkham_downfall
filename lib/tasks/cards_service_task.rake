@@ -29,10 +29,11 @@ namespace :cards do
         imagesrc: data['imagesrc'],
         backimagesrc: data['backimagesrc']
       )
-    end 
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('cards')
   end
 
-  
+
   private
   
   def remove_erroneous_keys(data)
