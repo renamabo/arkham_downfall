@@ -13,6 +13,7 @@ class CreateCards < ActiveRecord::Migration[6.1]
       t.integer :quantity
       t.integer :deck_limit
       t.string :traits
+      t.string :flavor
       t.boolean :permanent
       t.boolean :double_sided
       t.string :back_text

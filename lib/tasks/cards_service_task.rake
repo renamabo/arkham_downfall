@@ -1,30 +1,55 @@
 require './lib/services/base_service.rb'
-require './app/poros/card.rb'
 
 namespace :cards do
   desc 'Cards service: connect to ArkhamDB, consumes API and parses json'
-  # Services make calls to remote APIs
-  # Gets all cards from ArkhamDB.com.'
   task get_cards: :environment do
     response = BaseService.conn('https://arkhamdb.com/').get('/api/public/cards/')
-    data = BaseService.parse_json(response)
-    self.create_cards(data)
-    binding.pry
+    raw_data = BaseService.parse_json(response)
+    data = self.remove_erroneous_keys(raw_data)
+    cards = self.remove_placeholder_and_create_cards(data)
+    cards.each do |data|
+      Card.create(
+        pack_name: data['pack_name'],
+        type_code: data['type_code'],
+        type_name: data['type_name'],
+        subtype_code: data['subtype_code'],
+        faction_name: data['faction_name'],
+        code: data['code'],
+        name: data['name'],
+        subname: data['subname'],
+        text: data['text'],
+        quantity: data['quantity'],
+        deck_limit: data['deck_limit'],
+        traits: data['traits'],
+        flavor: data['flavor'],
+        permanent: data['permanent'],
+        double_sided: data['double_sided'],
+        back_text: data['back_text'],
+        back_flavor: data['back_flavor'],
+        imagesrc: data['imagesrc'],
+        backimagesrc: data['backimagesrc']
+      )
+    end
+    ActiveRecord::Base.connection.reset_pk_sequence!('cards')
   end
 
-  # desc 'Cards service: invoke get_cards task, iterate over data and return individual card objects.'
-  # task create_cards: :environment do
-  #   task_data = Rake::Task["cards:get_cards"].execute
-  #   data = task_data[0].call
-  #   binding.pry
-  #   data.map do |card_data| 
-  #     Card.new(card_data)
-  #   end
-  # end
-  private
 
-  def self.create_cards(parsed_data)
-    parsed_data.map do |card_data|
+  private
+  
+  def remove_erroneous_keys(data)
+    data.map do |card_data|
+      card_data.map do |k, v|
+        if !Card::CARD_VARS.include?(k)
+          card_data.delete(k)
+        end
+      end
+    end
+    data
+  end
+
+  def remove_placeholder_and_create_cards(data)
+    data.shift
+    data.map do |card_data|
       Card.new(card_data)
     end
   end
