@@ -1,7 +1,7 @@
 
 [![Contributors][contributors-shield]][contributors-url] [![Issues][issues-shield]][issues-url] [![Stargazers][stars-shield]][stars-url] [![Forks][forks-shield]][forks-url]
 
-### Welcome to Viewing Party - A database-driven web application
+### Welcome to Arkham Downfall - A database-driven web application
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -71,3 +71,28 @@
 2. Install gem packages: `bundle install`
 3. Set up the database: `rails db:{drop,create,migrate,seed}`
 4. Set up [API Access](#project-configurations)
+
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+
+#### <ins>Project Configurations</ins>
+
+* Ruby Version
+    ```bash
+    $ ruby -v
+    ruby 2.7.2p137 (2020-10-01 revision 5445e04352) [x86_64-darwin20]
+    ```
+
+* [System Dependencies](https://github.com/Bhjones45/tikiarte_be/blob/main/Gemfile)
+    ```bash
+    $ rails -v
+    Rails 6.1.7
+    ```
+
+* Database Creation
+    ```bash
+    $ rails db:{drop,create,migrate,seed}
+    Created database 'arkham_downfall_development'
+    Created database 'arkham_downfall_test'
+    ```
