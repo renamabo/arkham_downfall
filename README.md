@@ -70,7 +70,7 @@
 1. Fork and Clone the repo
 2. Install gem packages: `bundle install`
 3. Set up the database: `rails db:{drop,create,migrate,seed}`
-4. Set up [API Access](#project-configurations)
+4. Run `rake cards:get_cards` to pull data from ArkhamDB.com down to local DB. 
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
