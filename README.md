@@ -96,3 +96,7 @@
     Created database 'arkham_downfall_development'
     Created database 'arkham_downfall_test'
     ```
+
+### Functionality
+
+*coming soon*
